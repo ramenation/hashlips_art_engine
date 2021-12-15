@@ -23,7 +23,9 @@ renameFile(fileNames,shuffleLength);
 //remove .temp from files
 dataLength.forEach(removeTemp);
 
-//add metadeta reminder
+//add metadata reminder
+//what happens if it starts with 1 instead of 0
+//do the shuffled pngs match with json
 
 function renameFile(fileArray,shuffleArray,__callback){
 for (let i = 0; i < fileArray.length; i++) {
@@ -31,7 +33,7 @@ for (let i = 0; i < fileArray.length; i++) {
         console.log(`Updated ${fileNames[i]}.png to ===> ${shuffleLength[i]}.png.temp`);
         if ( err ) console.log('ERROR: ' + err);
     });
-    fs.rename(`${basePath}/build/json/${fileArray[i]}.json`, `${basePath}/build/json/${fileArray[i]}.json.temp`, function(err) {
+    fs.rename(`${basePath}/build/json/${fileArray[i]}.json`, `${basePath}/build/json/${shuffleArray[i]}.json.temp`, function(err) {
         console.log(`Updated  ${fileNames[i]}.json to ===> ${shuffleLength[i]}.json.temp`);
         if ( err ) console.log('ERROR: ' + err);
     });
@@ -87,11 +89,11 @@ function getFilenames(){
 //rework for async function to add promise
 function removeTemp(item,__callback){
     fs.rename(`${basePath}/build/images/${item}.png.temp`, `${basePath}/build/images/${item}.png`, function(err) {
-        console.log(`Updated ${item}.png.temp to ===> ${item}.png`);
+        //console.log(`Updated ${item}.png.temp to ===> ${item}.png`);
         if ( err ) console.log('ERROR: ' + err);
     });
     fs.rename(`${basePath}/build/json/${item}.json.temp`, `${basePath}/build/json/${item}.json`, function(err) {
-        console.log(`Updated ${item}.json.temp to ===> ${item}.json`);
+        //console.log(`Updated ${item}.json.temp to ===> ${item}.json`);
         if ( err ) console.log('ERROR: ' + err);
     });
    __callback;
